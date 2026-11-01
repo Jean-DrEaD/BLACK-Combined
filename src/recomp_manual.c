@@ -177,6 +177,12 @@ static const recomp_func_t g_itrace_wrappers[ITRACE_SLOTS] = {
 extern void sub_0014EB10_gen(void);
 extern void sub_0014EBF0_gen(void);
 extern void sub_00146EA0_gen(void);
+/* BLACK_COMBINED_FIX_SUBTITLE_ORDER: black_speech_subtitles.inc (PR #56) usa os simbolos abaixo antes de suas definicoes.
+ * Declaracoes identicas repetidas sao validas em C. Aplicado por Build-BlackCombined.ps1. */
+static int black_pc_ram_span(uint32_t address, uint32_t bytes);
+static void black_movie_skip_font(void);
+#define GUEST32(va) (*(uint32_t *)((uintptr_t)g_xbox_mem_offset + (va)))
+#define GUEST8(va) (*(uint8_t *)((uintptr_t)g_xbox_mem_offset + (va)))
 #include "black_speech_subtitles.inc"
 
 extern void sub_000C4570_gen(void);
