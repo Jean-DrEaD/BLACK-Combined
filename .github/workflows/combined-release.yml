@@ -1,0 +1,48 @@
+name: Combined release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0, submodules: false }
+
+      - name: Submódulos (xboxrecomp do PR #3 só por SHA)
+        shell: pwsh
+        run: |
+          git submodule update --init --recursive
+          if ($LASTEXITCODE) {
+            git -C third_party/xboxrecomp fetch origin refs/pull/3/head
+            git submodule update --init --recursive
+            if ($LASTEXITCODE) { exit 1 }
+          }
+
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+
+      - name: Pacote starter (launcher + fontes, sem jogo)
+        shell: pwsh
+        run: |
+          $v = '${{ github.ref_name }}'.TrimStart('v')
+          if ('${{ github.ref_type }}' -ne 'tag') { $v = (Get-Content VERSION -Raw).Trim() }
+          ./scripts/build-release.ps1 -Version $v -OutputDirectory releases
+          "VER=$v" >> $env:GITHUB_ENV
+
+      - name: Publicar release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          $notes = @"
+          Upstream portingpete/Black-2006-Recomp + RafaelGodoyEbert PR #56 + xboxrecomp PR #3 + correção C2371.
+          Correr/pular, legendas in-game, câmera livre, AO, reflexos, hold-to-aim, PT-BR.
+          NÃO inclui o jogo: requer seu disco original do Xbox (default.xbe SHA-256 DF2739C3…68F6).
+          Uso: extraia, rode 'Build BLACK.cmd' e aponte para seu disco/ISO.
+          "@
+          gh release create "${{ github.ref_name }}" (Get-ChildItem releases -File).FullName `
+            --title "BLACK Combined $env:VER" --notes $notes --prerelease

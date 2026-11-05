@@ -52,7 +52,7 @@ If building fails, choose Open the log on the build-failure screen. For game
 problems, use Settings > Diagnostics. If reporting a failure, include the actual
 error, your operating system and which step failed; attach the suggested logs
 yourself.
-Problems: https://github.com/portingpete/Black-2006-Recomp/issues
+Problems: https://github.com/Jean-DrEaD/BLACK-Combined/issues
 
 This is an experimental alpha. Full campaign playthroughs remain unverified.
 Ray tracing and split screen are experimental. Crosshair, hit markers and optional

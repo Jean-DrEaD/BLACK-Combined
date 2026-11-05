@@ -8,9 +8,9 @@ build can also run on x86_64 Linux through Wine/Proton; see [Linux setup](docs/l
 
 ## Start here
 
-1. Open the [release downloads](https://github.com/portingpete/Black-2006-Recomp/releases).
-   On Windows, download **BLACK-0.1.0-alpha.5-starter.zip**. On Linux, use
-   **BLACK-0.1.0-alpha.5-starter.tar.gz**. GitHub's **Source code** downloads do not
+1. Open the [release downloads](https://github.com/Jean-DrEaD/BLACK-Combined/releases).
+   On Windows, download **BLACK-0.1.0-combined.1-starter.zip**. On Linux, use
+   **BLACK-0.1.0-combined.1-starter.tar.gz**. GitHub's **Source code** downloads do not
    include the compiled launchers or required submodule sources.
 2. Extract the **whole archive** into a writable folder, for example `C:\Games\BLACK`.
    Open **BLACK Launcher.exe** on Windows, or **BLACK Settings.sh** on Linux.
@@ -32,7 +32,7 @@ to clone this repository or run terminal commands for the Windows starter.
 
 If building fails, choose **Open the log** on the build-failure screen. For game
 problems, use **Settings > Diagnostics**. Include the error and your operating
-system when [reporting a problem](https://github.com/portingpete/Black-2006-Recomp/issues).
+system when [reporting a problem](https://github.com/Jean-DrEaD/BLACK-Combined/issues).
 See **START HERE.txt** inside the download for the same steps offline.
 
 ## The launcher
@@ -278,7 +278,7 @@ supported by this build.
 Clone with submodules, then build from PowerShell in this repository:
 
 ```powershell
-git clone --recursive https://github.com/portingpete/Black-2006-Recomp.git
+git clone --recursive https://github.com/Jean-DrEaD/BLACK-Combined.git
 cd Black-2006-Recomp
 .\scripts\setup.ps1
 .\'BLACK Launcher.exe'
